@@ -1,17 +1,44 @@
-export default {
-  MAX_ATTACHMENT_SIZE: 5000000,
+const dev = {
   s3: {
     REGION: "us-east-1",
-    BUCKET: "notes-app-uploads"
+    BUCKET: "notes-app-2-api-dev-attachmentsbucket-ilur1zyct2eb"
   },
   apiGateway: {
     REGION: "us-east-1",
-    URL: "https://5by75p4gn3.execute-api.us-east-1.amazonaws.com/prod"
+    URL: "https://api.myserverlessapp.com/dev"
   },
   cognito: {
     REGION: "us-east-1",
-    USER_POOL_ID: "us-east-1_udmFFSb92",
-    APP_CLIENT_ID: "4hmari2sqvskrup67crkqa4rmo",
-    IDENTITY_POOL_ID: "us-east-1:ceef8ccc-0a19-4616-9067-854dc69c2d82"
+    USER_POOL_ID: "us-east-1_6yn0qhs9d",
+    APP_CLIENT_ID: "49q6178c0mkrc87ctpanmjv6rt",
+    IDENTITY_POOL_ID: "us-east-1:cdf82538-af25-4794-b3e9-d02801799cdb"
   }
+};
+
+const prod = {
+  s3: {
+    REGION: "us-east-1",
+    BUCKET: "notes-app-2-api-prod-attachmentsbucket-a91yzjw7nl12"
+  },
+  apiGateway: {
+    REGION: "us-east-1",
+    URL: "ttps://api.myserverlessapp.com/prod"
+  },
+  cognito: {
+    REGION: "us-east-1",
+    USER_POOL_ID: "us-east-1_pXpYcPn9y",
+    APP_CLIENT_ID: "1jdguuijjvips3bldnrjkgh6bv",
+    IDENTITY_POOL_ID: "us-east-1:6068e79f-92d0-485d-afe2-a823e9956adb"
+  }
+};
+
+// Default to dev if not set
+const config = process.env.REACT_APP_STAGE === 'prod'
+  ? prod
+  : dev;
+
+export default {
+  // Add common config values here
+  MAX_ATTACHMENT_SIZE: 5000000,
+  ...config
 };
